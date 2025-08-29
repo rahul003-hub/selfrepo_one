@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted    # uses your self-hosted runner
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -18,7 +18,8 @@ jobs:
         run: docker --version
 
       - name: Build and run containers
-        run: docker-compose up --build -d
+        run: docker compose up --build -d
 
       - name: Test app
         run: curl -f http://localhost:3000 || exit 1
+

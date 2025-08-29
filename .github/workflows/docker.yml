@@ -17,6 +17,9 @@ jobs:
       - name: Check Docker version
         run: docker --version
 
+      - name: Clean up old containers and volumes
+        run: docker compose down -v
+
       - name: Build and run containers
         run: docker compose up --build -d
 

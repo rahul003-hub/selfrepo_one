@@ -20,6 +20,20 @@ jobs:
       - name: Build and run containers
         run: docker compose up --build -d
 
+      - name: Wait for app to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:3000; then
+              echo "App is up!"
+              exit 0
+            else
+              echo "Waiting for app to start..."
+              sleep 2
+            fi
+          done
+          echo "App did not start in time"
+          exit 1
+
       - name: Test app
         run: curl -f http://localhost:3000 || exit 1
 
